@@ -15,11 +15,6 @@ printf ("Ingresar un numero: ");
 scanf ("%d", &num);
 
 
-
-
-
-
-
     num_invertido = invertirNumero ( num);
      digitosImpares(num, &numerosImpares); 
   
