@@ -1,0 +1,27 @@
+ALGORITMO: cantidad_letras
+ENTRADA: frase: cc con MF
+SALIDA: palabra_larga, palabra_corta:entero
+VAR_AUX: contador:entero
+
+A0_INICIALIZAR
+	palabra_larga <-- 0
+	palabra_corta <-- 999
+	contador <-- 0
+A1_ Contar_palabras 
+	LEER (frase)
+		MIENTRAS frase <> MF 
+			SI frase = " "  OR frase = 'MF' ENTONCES
+				SI contador > palabra_larga ENTONCES 
+					palabra_larga <-- contador 
+				FIN_SI
+
+					SI contador < palabra_corta ENTONCES 
+						palabra_corta <-- contador 
+					SINO
+						contador <-- 0
+					FIN_SI
+
+	LEER (frase)
+		FIN_MIENTRAS 
+A2_ ESCRIBIR (palaabra_larga, palabra_corta)
+A3_PARAR
