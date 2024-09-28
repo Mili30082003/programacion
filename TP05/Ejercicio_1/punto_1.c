@@ -54,14 +54,20 @@ printf ("\n");
 
 void cargarArreglo(int arreglo[], int tama, int num1, int num2){
 
-
+if (num1 < num2) { 
 for (int i = 0; i < tama; i++)
 {
     arreglo [i] = num1 + rand () % (num2 - num1 + 1);
 
 }
+} else { /*Hago este control para verificar si num1 es menor que num2 entonces funciona bien a la hora de cargar el arreglo, si num1 es mayor que num2 entonces se intercambian las posiciones de la formula para buscar rango */
 
+}
+for (int i = 0; i < tama; i++)
+{
+    arreglo [i] = num2 + rand () % (num1 - num2 + 1);
 
+}
  }
 
  void mostrarArreglo(int arreglo[], int tama)
@@ -81,10 +87,10 @@ printf ("\n");
 
 int buscarMayor(int arreglo[], int tama){
 
-int mayor = arreglo[0];
-for (int i = 1; i < tama; i++)
+int mayor = 0;
+for (int i = 0; i < tama; i++)
 {
-    if ( arreglo[0] > mayor)
+    if ( arreglo[i] > mayor)
     {
           mayor = arreglo[i];
     }
@@ -101,24 +107,16 @@ int contadorImpares = 0;
 
 for (int i = 0; i < tama; i++)
 {
-    if ( arreglo[i] % 2 != 0 )
+    if (i % 2 != 0 )
     {
          sumaImpares += arreglo [i];
          contadorImpares++;
     }
-    
-
 }
-if (contadorImpares > 0)
-{
-    float promedio = (float)sumaImpares / contadorImpares;
-    printf ("El promedio de los numeros impares es : %.2f\n",promedio);
-} else {
-    printf ("No hay numeros impares en el arreglo.\n");
+    printf ("El promedio de los numeros impares es : %d\n",sumaImpares/contadorImpares);
 }
 
 
-}
 void reemplazarNumero(int arreglo[], int tama, int numeroNuevo){
 for (int i = 0; i < tama; i++)
 {
@@ -134,14 +132,14 @@ for (int i = 0; i < tama; i++)
 
 void IncrementarImpares(int arreglo[], int tama){
 
-int contadorImpares = 0;
+
 for (int i = 0; i < tama; i++)
 {
     if ( arreglo[i] % 2 != 0 )
     {
     
-         contadorImpares++;
+        arreglo[i]++;
     }
-    printf("Numeros Impares: %d\n");
+    printf("arreglo (%d): %d\n", arreglo[i]);
 
 } }
