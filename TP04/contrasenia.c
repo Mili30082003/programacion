@@ -1,3 +1,55 @@
+
+/* 
+ALGORITMO: contraseña_validacion
+ENTRADA: contraseña: cc,  cantCarcateres: z+
+        mayuscula, minuscula, num, caracterEspecial: int
+A0_INICIALIZAR
+    canCarcteres <-- 0
+    mayuscula <-- 0
+    minuscula <-- 0
+    num <-- 0
+    caracterEspecial <-- 0
+A1_ LEER (contraseña)
+A2_Validar_Contraseña
+    MIENTRAS (contraseña <> '.')
+        SI (mayuscula = 1) ENTONCES
+            contraseña = mayusucula
+          FIN_SI
+         SI (minuscula = 1) ENTONCES
+            contraseña = minuscula
+          FIN_SI 
+         SI (num = 1) ENTONCES
+            contraseña = num
+          FIN_SI
+          SI (caracterEspecial = 1) ENTONCES
+                contraseña = caracterEspecial
+            FIN_SI 
+         LEER (contraseña)     
+       FIN_MIENTRAS
+     SI (cantCarcteres >= 8 AND mayuscula AND minuscula AND num AND caracterEspecial) ENTONCES
+            ESCRIBIR ("La contraseña es valida")
+      SINO 
+            ESCRIBIR ("La contraseña no es valida, debe tener al menos: ")
+            SI (carcteres  >= 8) ENTONCES  
+                    ESCRIBIR ("8 caracteres")
+             SINO 
+             SI (contraseña <> mayuscula) ENTONCES
+                    ESCRIBIR ("debe tener al menos una letra mayuscula")
+              SINO
+              SI (contraseña <> minuscula) ENTONCES
+                    ESCRIBIR ("debe tener al menos una letra mayuscula")
+               SINO
+                SI (contraseña <> num) ENTONCES
+                    ESCRIBIR ("debe tener al menos un numero")
+                 SINO
+                SI (contraseña <> caracterEspecial) ENTONCES
+                    ESCRIBIR ("debe tener al menos un caracter especial")
+                   FIN_SI
+                    FIN_SI
+                    FIN_SI
+                    FIN_SI                      
+*/
+
 #include <stdio.h>
 #include <ctype.h>
 #include<stdbool.h>
