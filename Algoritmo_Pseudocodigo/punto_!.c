@@ -100,6 +100,73 @@ A0_ INICIALIZAR
   A3_PARAR                                      
 */
 
+#include <stdio.h>
+
+int EsVocalAbierta (char letra);
+int EsVocalCerrada (char letra);
+
+
+int main () {
+char frase, letra = ' ';
+int VocalAbierta, VocalCerrada;
+int CantDiptongos = 0;
+printf("Ingresar una frase terminada en un punto: ");
+frase = getchar();
+
+
+    while (frase != '.')
+    {
+        while (frase != ' ' && frase != '.')
+        {
+        
+          
+          if ( frase == EsVocalAbierta(frase) )
+          {
+frase = getchar();
+          
+          } if (frase == EsVocalCerrada(frase))
+          {
+          frase = getchar();
+            CantDiptongos++;
+          }
+          
+      frase = getchar();
+
+        }
+        if (frase != '.')
+        {
+            frase = getchar();
+        }
+        
+    }
+    printf ("La cantidad de diptongos es: %d", CantDiptongos);
+    
+    return 0;
+
+}
+
+int EsVocalAbierta (char letra){
+if (letra == 'a' || letra =='e'|| letra == 'o')
+{
+    return 1;
+} else {
+
+    return 0;
+}
+
+
+}
+int EsVocalCerrada (char letra){
+if (letra == 'u' || letra =='i')
+{
+    return 1;
+} else {
+
+    return 0;
+}
+
+
+}
 /*.Diseñe un algoritmo que cuente cuantas son las palabras que tinenen mas vocales que consonantes y
   ademas que remplaze a las vocales por #
   

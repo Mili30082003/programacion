@@ -3,7 +3,7 @@
 int main () {
 char frase;
 char MF = '.';
-char anterior;
+char anterior = ' ';
 int cantON = 0;
 
 printf ("Ingresar una frase terminada en un punto: ");
@@ -14,7 +14,8 @@ while (frase != MF)
 {
    while (frase != MF && frase != ' ')
    {
-    
+   
+        frase = getchar ();
    }
    
 
