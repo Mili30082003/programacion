@@ -42,3 +42,42 @@ venatajas :
 
         return 0;
        }
+
+
+
+       CADENAS Y PUNTEROS
+       |__> Una cadena en C es un Array de carcateres que finaliza con un caracter nulo : ('\0') ---> Indica el final de la cadena |
+                 |__> char saludo[] = "Hola";
+                            |
+                            |__> la variable saludo es una cadena que contiene
+
+                --> s  a  l  u  d  o 
+                    |H| |O| |L| |A| |\0|
+
+         Cuando defino una cadena como 'char saludo[] = "hola"' --> El nombre del array saludo es un puntero al primer caracter de la cadena 
+
+         EJEMPLO 
+                |
+                |__> 
+                       #include <stdio.h>
+
+                    int main() {
+                    char saludo[] = "Hola";
+                    char *ptr = saludo;  // Apunta al primer carácter de la cadena
+
+                    while (*ptr != '\0') {  // Mientras no lleguemos al carácter nulo
+                        printf("%c", *ptr); // Imprime el carácter actual
+                        ptr++;              // Avanza al siguiente carácter
+                    }
+                    return 0;
+                }
+          
+          PASAJES DE PARAMETROS 
+                                POR valor  
+                                POR referencia 
+
+
+
+                Pasaje por valor: Se pasa una copia del valor de la variable a la función. Los cambios dentro de la función no afectan a la variable original.
+
+                Pasaje por referencia (mediante punteros): Se pasa la dirección de memoria de la variable, lo que permite modificar directamente el valor de la variable original.
