@@ -15,9 +15,9 @@ scanf("%d", &numero);*/
 
 int numeros[5] = {2,4,6,8,10}; /* Al arreglo lo puedo manipular como un puntero */
 
+// contar la cantidad de numeros pares
+// resuelvo utilizando notacion de puntero
 int CantPares = 0;
-
-
 for (int i = 0; i < 5; i++)
 {
     CantPares++;
@@ -55,6 +55,8 @@ for (int i = 0; i < 5; i++)
 
 // Si necesito seguir trabajando con el arreglo
 int *p_Aux2 = p_arreglo; // declaro otro auxiliar 
+
+
 
   
 
