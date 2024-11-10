@@ -30,7 +30,7 @@ void main (){
         char frase [100];
         char * p_frase = frase;
         
-
+    // p_frase = &frase[0];
         int cantConsonantes = 0;
         int * p_contadorConsonantes = &cantConsonantes;
         
@@ -53,5 +53,9 @@ void main (){
         p_frase = p_frase - tama; // le resto tama veces para volver al principio del arreglo
 
         printf("Cantidad de consonantes: %d\n", *p_contadorConsonantes);
-        printf("Frase Modificada: %s", p_frase);
+        printf("Frase Modificada: %s\n", p_frase);
+        // Direccion de memoria del puntero
+        printf("Direccion de Memoria del puntero: %p\n", &p_frase);
+        printf("Direccion de memoria del primer elemento del arreglo: %p\n", p_frase); // Direccion 0 --> &p_frase[0]
+        printf("Contenido del primer elemento del puntero: %c\n", *p_frase);
 }
