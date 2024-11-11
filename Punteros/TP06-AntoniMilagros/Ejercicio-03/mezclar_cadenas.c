@@ -12,33 +12,3 @@
  Cadena 1: “Primavera”- Cadena 2: “Florecer”- Número: 4
  Cadena 1 de Salida: PriFlorecermavera*/
 
- #include <stdio.h>
- #include <string.h>
-
-void mezclarCadenas(char *cadena1, char *cadena2, char *resultado, int tama){
-
-    // Recorro la primera cadena
-    tama = strlen(cadena1);
-    for (int i = 0; i < tama; i++)
-    {
-        *resultado = *cadena1;
-        cadena1++;
-        resultado++;
-    }
-    
-
-}
-
- void main () {
-    char cadena1[50], cadena2[50], resultado[100];
-    
-    printf("Ingrese la primera cadena: ");
-    gets(cadena1);
-
-    printf("Ingrese la segunda cadena: ");
-    gets(cadena2);
-
-
-
-
- }
