@@ -61,7 +61,10 @@ void main()
 
     MostrarDatos(Mili);
 
-    ModificarSueldo(&Mili.sueldo, -50);
+    //otraFuncion(Mili.fechaNacimiento) // si necesito como parametro un dato de una estructura
+    
+
+    ModificarSueldo(&Mili.sueldo,50);
   
       printf("\n");
 
