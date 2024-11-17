@@ -114,3 +114,12 @@ void MostrarInfoViaje(InfoAgencia *arreglo, int n) {
     
 }
 
+void ActualizarCostos (InfoAgencia *arreglo){
+    float porcentaje;
+
+    printf("Ingrese el porcentaje: ");
+    scanf("%f", &porcentaje);
+
+    arreglo->CostoViaje += arreglo->CostoViaje * (porcentaje/100);
+    printf("Nuevo costo del viaje: %.2f", arreglo->CostoViaje);
+}
