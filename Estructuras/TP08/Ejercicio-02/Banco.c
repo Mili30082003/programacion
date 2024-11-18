@@ -4,29 +4,28 @@
 
 struct CuentaBancaria
 {
-    char * cbu;
-    char * tipo_cuenta;
+    char *cbu;
+    char *tipo_cuenta;
     float SaldoActual;
 } typedef CuentaBancaria;
 
-
 struct Cliente
 {
-    char * Sucursal;
+    char *Sucursal;
     int Dni;
-    char * Nombre;
-    CuentaBancaria * cuentas;
+    char *Nombre;
+    CuentaBancaria *cuentas;
     int cantCuenta;
-    
+
 } typedef Cliente;
 
-void cargarClientes (Cliente * clientes, int cantClientes){
+void cargarClientes(Cliente *clientes, int cantClientes)
+{
 
     for (int i = 0; i < cantClientes; i++)
     {
         clientes[i].Sucursal = malloc(sizeof(char) * 50);
         clientes[i].Nombre = malloc(sizeof(char) * 50);
-
 
         printf("\n ----- Cliente %d ------\n", i + 1);
         printf("\n - Sucursal: ");
@@ -39,15 +38,13 @@ void cargarClientes (Cliente * clientes, int cantClientes){
         fflush(stdin);
         gets(clientes[i].Nombre);
 
-
         printf("\nCantidad de cuentas bancarias: ");
         scanf("%d", &clientes[i].cantCuenta);
 
-//  libros[i].TituloLibro = realloc(libros[i].TituloLibro, strlen(libros[i].TituloLibro) + 1);
+        //  libros[i].TituloLibro = realloc(libros[i].TituloLibro, strlen(libros[i].TituloLibro) + 1);
 
         clientes[i].Sucursal = realloc(clientes[i].Sucursal, strlen(clientes[i].Sucursal) + 1);
         clientes[i].Nombre = realloc(clientes[i].Nombre, strlen(clientes[i].Nombre) + 1);
-
 
         clientes[i].cuentas = malloc(sizeof(CuentaBancaria) * clientes[i].cantCuenta);
 
@@ -70,44 +67,42 @@ void cargarClientes (Cliente * clientes, int cantClientes){
 
             clientes[i].cuentas[j].cbu = realloc(clientes[i].cuentas[j].cbu, strlen(clientes[i].cuentas[j].cbu));
             clientes[i].cuentas[j].tipo_cuenta = realloc(clientes[i].cuentas[j].tipo_cuenta, strlen(clientes[i].cuentas[j].tipo_cuenta) + 1);
-        }     
-
+        }
     }
-    
 }
 
 //  1. Módulo para mostrar el cliente con el mayor número de cuentas bancarias
 
-void MayorNumeroCuentasBancarias (Cliente * clientes , int cantClientes)
+void MayorNumeroCuentasBancarias(Cliente *clientes, int cantClientes)
 {
 
-     int maxCuentas = 0, pos = -1;
+    int maxCuentas = 0, pos = -1;
 
-     for (int i = 0; i < cantClientes; i++)
-     {
+    for (int i = 0; i < cantClientes; i++)
+    {
         if (clientes[i].cantCuenta > maxCuentas)
         {
             maxCuentas = clientes[i].cantCuenta;
             pos = i;
         }
-        
-     }
+    }
 
-        if (maxCuentas > 1) {
+    if (maxCuentas > 1)
+    {
         printf("\nCliente con mayor número de cuentas:\n");
-        printf("Nombre: %s\nSucursal: %s\nNúmero de cuentas: %d\n", 
-               clientes[pos].Nombre, 
-               clientes[pos].Sucursal, 
+        printf("Nombre: %s\nSucursal: %s\nNúmero de cuentas: %d\n",
+               clientes[pos].Nombre,
+               clientes[pos].Sucursal,
                clientes[pos].cantCuenta);
-    } else {
+    }
+    else
+    {
         printf("\nNo hay clientes con más de 1 cuenta bancaria.\n");
     }
 }
-   
 
-
-
-void CuentaSaldoMayor (Cliente * clientes, int cantClientes, float valor){
+void CuentaSaldoMayor(Cliente *clientes, int cantClientes, float valor)
+{
 
     printf("\n Cuentas con saldo mayor a %.2f: \n", valor);
     for (int i = 0; i < cantClientes; i++)
@@ -118,11 +113,8 @@ void CuentaSaldoMayor (Cliente * clientes, int cantClientes, float valor){
             {
                 printf("Cliente: %s | CBU %s | Saldo: %.2f", clientes[i].Nombre, clientes[i].cuentas[j].cbu, clientes[i].cuentas[j].SaldoActual);
             }
-            
         }
-        
     }
-    
 }
 // void MostrarClientes (Cliente * clientes, int cantClientes){
 
@@ -133,7 +125,6 @@ void CuentaSaldoMayor (Cliente * clientes, int cantClientes, float valor){
 //             printf("  DNI: %d\n", clientes[i].Dni);
 //             printf("  Cuentas Bancarias: \n");
 
-
 //             for (int j = 0; j < clientes[i].cantCuenta; j++)
 //             {
 //                 printf("    Cuenta %d\n", j + 1);
@@ -141,12 +132,12 @@ void CuentaSaldoMayor (Cliente * clientes, int cantClientes, float valor){
 //                 printf("    Tipo de Cuenta: %s\n", clientes[i].cuentas[j].tipo_cuenta);
 //                 printf("    Saldo Actual: %.2f", clientes[i].cuentas[j].SaldoActual);
 //             }
-            
-//         }   
+
+//         }
 // }
 
-
-void clientesCentroDolares (Cliente * clientes , int cantClientes){
+void clientesCentroDolares(Cliente *clientes, int cantClientes)
+{
     for (int i = 0; i < cantClientes; i++)
     {
         if (strcmp(clientes[i].Sucursal, "Centro") == 0)
@@ -157,16 +148,13 @@ void clientesCentroDolares (Cliente * clientes , int cantClientes){
                 {
                     printf("Cliente: %s | CBU: %s | Saldo %.2f\n", clientes[i].Nombre, clientes[i].cuentas[j].cbu, clientes[i].cuentas[j].SaldoActual);
                 }
-                
             }
-            
         }
-        
     }
-    
 }
 
-void LiberarMemoria (Cliente * clientes, int cantClientes){
+void LiberarMemoria(Cliente *clientes, int cantClientes)
+{
     for (int i = 0; i < cantClientes; i++)
     {
         for (int j = 0; j < clientes[i].cantCuenta; i++)
@@ -174,32 +162,33 @@ void LiberarMemoria (Cliente * clientes, int cantClientes){
             free(clientes[i].cuentas[j].cbu);
             free(clientes[i].cuentas[j].tipo_cuenta);
         }
-         free(clientes[i].cuentas);
+        free(clientes[i].cuentas);
         free(clientes[i].Nombre);
-        free(clientes[i].Sucursal);    
+        free(clientes[i].Sucursal);
     }
     free(clientes);
 }
 
-void main () {
+void main()
+{
 
-int cantiClientes;
+    int cantiClientes;
 
-printf("Ingrese La cantidad de Clientes:\n ");
-scanf("%d", &cantiClientes);
+    printf("Ingrese La cantidad de Clientes:\n ");
+    scanf("%d", &cantiClientes);
 
-Cliente * clientes = malloc(sizeof(Cliente) * cantiClientes);
+    Cliente *clientes = malloc(sizeof(Cliente) * cantiClientes);
 
-cargarClientes(clientes, cantiClientes);
-// MostrarClientes(clientes, cantiClientes);
-MayorNumeroCuentasBancarias(clientes, cantiClientes);
+    cargarClientes(clientes, cantiClientes);
+    // MostrarClientes(clientes, cantiClientes);
+    MayorNumeroCuentasBancarias(clientes, cantiClientes);
 
-float Saldo;
-printf("Ingresar un saldo para buscar cuentas: ");
-scanf("%f", &Saldo);
-CuentaSaldoMayor(clientes, cantiClientes, Saldo);
+    float Saldo;
+    printf("Ingresar un saldo para buscar cuentas: ");
+    scanf("%f", &Saldo);
+    CuentaSaldoMayor(clientes, cantiClientes, Saldo);
 
-clientesCentroDolares(clientes, cantiClientes);
+    clientesCentroDolares(clientes, cantiClientes);
 
-LiberarMemoria(clientes, cantiClientes);
+    LiberarMemoria(clientes, cantiClientes);
 }
