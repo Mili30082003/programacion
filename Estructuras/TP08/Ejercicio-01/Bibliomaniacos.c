@@ -129,7 +129,7 @@ for (int i = 0; i < cantLibros; i++)
     int Menor21 = 0;
     for (int j = 0; j < libros[i].num_lectores; j++)
     {
-        if (libros[i].Lectores[j].Edad < 21)
+        if (libros[i].Lectores[j].Edad > 21)
         {
             Menor21 = 1;
             break;
@@ -139,8 +139,10 @@ for (int i = 0; i < cantLibros; i++)
 
     if (Menor21)
     {
-        printf("Titulo: %s", libros[i].TituloLibro);
-        printf("Genero: %s", libros[i].Genero);
+        printf("Es menor de 21:\n ");
+        printf("Lector: %s\n", libros[i].Lectores->Nombre);
+        printf("Titulo: %s\n", libros[i].TituloLibro);
+        printf("Genero: %s\n", libros[i].Genero);
     }
     
     
@@ -181,6 +183,7 @@ Libro *libros = malloc(sizeof(Libro) * cantlibros);
 cargarLibro(libros, cantlibros);
 // MostrarLibro(libros, cantlibros);
 MayorCantidadLectores(libros, cantlibros);
+MostrarLibrosLectoresMayor21(libros, cantlibros);
 MostrarLibrosLectoresMayor21(libros, cantlibros);
 liberarMemoria(libros, cantlibros);
 
