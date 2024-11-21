@@ -43,7 +43,7 @@ void CargarCliente(Cliente *clientes, int cantClientes)
     {
         clientes[i].Nombre = malloc(sizeof(char) * 50);
 
-        printf("\nIngresar el DNI del cliente: ");
+        printf("\nIngresar el DNI del cliente # %d: ", i + 1);
         fflush(stdin);
         scanf("%d", &clientes[i].DNI);
         printf("'\nNombre: ");
@@ -61,7 +61,7 @@ void CargarCliente(Cliente *clientes, int cantClientes)
         for (int j = 0; j < clientes[i].cantCompras; j++)
         {
 
-            printf("\nFecha de Compra: ");
+            printf("\nFecha de Compra del cliente: ");
             scanf("%d %d %d", &clientes[i].compras[j].fechas.dia,
                   &clientes[i].compras[j].fechas.mes,
                   &clientes[i].compras[j].fechas.anio);
@@ -138,8 +138,8 @@ void CompraClienteJoven(Cliente *clientes, int cantclientes)
     }
 }
 
-
-void ClienteConMasCompras (Cliente * clientes, int cantclientes) {
+void ClienteConMasCompras(Cliente *clientes, int cantclientes)
+{
     int MaxCompra = 0;
     int indiceCliente = -1;
 
@@ -150,54 +150,155 @@ void ClienteConMasCompras (Cliente * clientes, int cantclientes) {
             MaxCompra = clientes[i].cantCompras;
             indiceCliente = i;
         }
-        
-     
-        }
-
-        if (indiceCliente != -1)
-        {
-            printf("\n Cliente con mas Compras realizadas: \n");
-            printf("\t - Nombre: %s\n", clientes[indiceCliente].Nombre);
-            printf("\t - DNI: %d\n", clientes[indiceCliente].DNI);
-        }
-        
-        
     }
-    
 
-void ClienteConMayorCantJuegos (Cliente * clientes, int cantClientes) {
+    if (indiceCliente != -1)
+    {
+        printf("\n Cliente con mas Compras realizadas: \n");
+        printf("\t - Nombre: %s\n", clientes[indiceCliente].Nombre);
+        printf("\t - DNI: %d\n", clientes[indiceCliente].DNI);
+    }
+}
 
-int MayorCantJuegos = 0;
-int indiceMayorJuegos = -1;
+void ClienteConMayorCantJuegos(Cliente *clientes, int cantClientes)
+{
+
+    int MayorCantJuegos = 0;
+    int indiceMayorJuegos = -1;
 
     for (int i = 0; i < cantClientes; i++)
     {
-       int TotalJuegos = 0;
-       for (int j = 0; j < clientes[i].cantCompras ; i++)
-       {
-        TotalJuegos += clientes[i].compras[j].CantJuegosComprados;
-        
-       }
-       if (TotalJuegos > MayorCantJuegos)
-       {
-        MayorCantJuegos = TotalJuegos;
-        indiceMayorJuegos = i;
-       }
-       
+        int TotalJuegos = 0;
+        for (int j = 0; j < clientes[i].cantCompras; j++)
+        {
+            TotalJuegos += clientes[i].compras[j].CantJuegosComprados;
+        }
+        if (TotalJuegos > MayorCantJuegos)
+        {
+            MayorCantJuegos = TotalJuegos;
+            indiceMayorJuegos = i;
+        }
     }
-    
+
     if (indiceMayorJuegos != -1)
     {
         printf("\n El cliente que ha comprado la mayor cantidad de juegos es: \n");
         printf("Dni: %d\n", clientes[indiceMayorJuegos].DNI);
-        printf("Nombre: %s\n", clientes[indiceMayorJuegos].DNI);
+        printf("Nombre: %s\n", clientes[indiceMayorJuegos].Nombre);
         printf("Total de Juegos comprados: %d\n", MayorCantJuegos);
-    } else {
+    }
+    else
+    {
         printf("No hay clientes que hayan realizado compras. \n");
     }
+}
+
+void VentaMasCostosa2024(Cliente *clientes, int cantClientes)
+{
+    float VentaMasCostosa = 0.0;
+    int indiceVenta = -1;
+
+    for (int i = 0; i < cantClientes; i++)
+    {
+        float TotalVenta = 0;
+        for (int j = 0; j < clientes[i].cantCompras; j++)
+        {
+            for (int k = 0; k < clientes[i].compras[j].CantJuegosComprados; k++)
+            {
+                TotalVenta += clientes[i].compras[j].CantJuegosComprados * clientes[i].compras[j].juegos[k].Precio;
+            }
+        }
+
+        if (TotalVenta > VentaMasCostosa)
+        {
+            VentaMasCostosa = TotalVenta;
+            indiceVenta = i;
+        }
+    }
+
+    if (indiceVenta != -1)
+    {
+        printf("El Cliente con la venta mas Costosa es : %s con un total de %.2f", clientes[indiceVenta].Nombre, VentaMasCostosa);
+    }
+    else
+    {
+        printf("No se registraron ventas\n");
+    }
+}
+
+void PuntosObtenidos(Cliente *clientes, int cantClientes)
+{
+
+    printf("\n Listado de Clientes y sus Puntos : \n");
+
+    for (int i = 0; i < cantClientes; i++)
+    {
+        int puntosObtenidos = 0;
+
+        // Sumo los puntos obtenidos en todas las compras del cliente
+        for (int j = 0; j < clientes[i].cantCompras; j++)
+        {
+            puntosObtenidos += clientes[i].compras[j].PuntosObtenidosCompra;
+        }
+
+        printf("Cliente #%d\n", i + 1);
+        printf("\t - DNI: %d\n", clientes[i].DNI);
+        printf("\t - Nombre: %s\n", clientes[i].Nombre);
+        printf("\t - Puntos Totales: %d \n", puntosObtenidos);
+    }
+}
+
+void cantVentasPlataforma(Cliente *clientes, int cantclientes)
+{
+
+    int cantPC = 0, cantPlayStation = 0, cantXBOX = 0;
+    for (int i = 0; i < cantclientes; i++)
+    {
+        for (int j = 0; j < clientes[i].cantCompras; j++)
+        {
+            for (int k = 0; k < clientes[i].compras[j].CantJuegosComprados; k++)
+            {
+                if (strcmp(clientes[i].compras[i].juegos[k].Plataforma, "PC\n") == 0)
+                {
+                    cantPC++;
+                }
+                else if (strcmp(clientes[i].compras[j].juegos[k].Plataforma, "PlayStation\n") == 0)
+                {
+                    cantPlayStation++;
+                }
+                else if (strcmp(clientes[i].compras[j].juegos[k].Plataforma, "XBOX\n") == 0)
+                {
+                    cantXBOX++;
+                }
+            }
+        }
+    }
+    printf("\n Cantidad de ventas por plataforma : \n ");
+    printf("\t PC: %d\n", cantPC);
+    printf("\t PlayStation: %d\n", cantPlayStation);
+    printf("\t XBOX: %d\n", cantXBOX);
+}
+
+
+// void VentaJuegosAventura( Cliente * clientes, int cantClientes) {
+
+//     int cantJuegosAventura = 0;
+
+//     for (int i = 0; i < cantClientes; i++)
+//     {
+//         for (int j = 0; j < clientes[i].cantCompras; j++)
+//         {
+//             for (int k = 0; k < clientes[i].compras[j].CantJuegosComprados; k++)
+//             {
+//                 Juego juego = clientes[i].compras[j].
+//             }
+            
+//         }
+        
+//     }
     
 
-}
+// }
 
 
 void main()
@@ -217,4 +318,13 @@ void main()
 
     printf("\n");
     ClienteConMayorCantJuegos(clientes, cantidadClientes);
+
+    printf("\n");
+    VentaMasCostosa2024(clientes, cantidadClientes);
+
+    printf("\n");
+    PuntosObtenidos(clientes, cantidadClientes);
+
+    printf("\n");
+    cantVentasPlataforma(clientes, cantidadClientes);
 }
