@@ -140,100 +140,98 @@ void MostrarPedidos(Arbol *parbol)
     }
 }
 
-void AgregarPedidos (Arbol * parbol, int cantArboles  ) {
-char NombreVulgar[30];
-printf("Ingrese el nombre vulgar de la especie: ");
-fflush(stdin);
-gets(NombreVulgar);
-
-
-// Buscar el arbol por su nombre vulgar
-int indideArbol = -1;
-
-for (int i = 0; i < cantArboles; i++)
+void AgregarPedidos(Arbol *parbol, int cantArboles)
 {
-    if (strcmp(parbol[i].especie.Nvulgar, NombreVulgar) == 0)
+    char NombreVulgar[30];
+    printf("Ingrese el nombre vulgar de la especie: ");
+    fflush(stdin);
+    gets(NombreVulgar);
+
+    // Buscar el arbol por su nombre vulgar
+    int indideArbol = -1;
+
+    for (int i = 0; i < cantArboles; i++)
     {
-        indideArbol = i;
-        break;
+        if (strcmp(parbol[i].especie.Nvulgar, NombreVulgar) == 0)
+        {
+            indideArbol = i;
+            break;
+        }
     }
-    
+
+    // Si no encuentra el arbol, muestro un mensaje
+    if (indideArbol == -1)
+    {
+        printf("La especie con nombre vulgar %s no fue encontrada. \n", NombreVulgar);
+        return;
+    }
+
+    // Verifico si hya stock disponible
+    if (parbol[indideArbol].stock <= 0)
+    {
+        printf("No hay stock disponible para la especie %s \n", parbol[indideArbol].especie.Nvulgar);
+        return;
+    }
+
+    // Crear Pedido
+    Pedido nuevoPedido;
+
+    printf("Ingrese la razon social del cliente: ");
+    gets(nuevoPedido.cliente.razonSocial);
+    printf("Ingrese el telefono celular: ");
+    gets(nuevoPedido.cliente.telefono);
+
+    printf("Ingrese el nombre del empleado: ");
+    gets(nuevoPedido.empleado.Nombre);
+    printf("Ingrese el Apellido del empleado: ");
+    gets(nuevoPedido.empleado.Apellido);
+
+    printf("Ingrese la cantidad de pedidos: ");
+    scanf("%d", &nuevoPedido.cantidad);
+
+    // Verifico si la cantidad pedida supera el stock
+    if (nuevoPedido.cantidad > parbol[indideArbol].stock)
+    {
+        printf("No hay suficiente stock. Stock disponibe: %d\n", parbol[indideArbol].stock);
+        return;
+    }
+
+    // Restar el stock y agregar el pedido
+    parbol[indideArbol].stock -= nuevoPedido.cantidad;
+    parbol[indideArbol].pedidos = (Pedido *)malloc(sizeof(Pedido));
+    parbol[indideArbol].pedidos[0] = nuevoPedido;
+    parbol[indideArbol].cantPedidos = 1;
+
+    printf("Pedido agregado a la especie '%s'. \n", parbol[indideArbol].especie.Nvulgar);
 }
 
-// Si no encuentra el arbol, muestro un mensaje
-if (indideArbol == -1)
+void ActualizarStock(Arbol *parbol, int cantArboles)
 {
-    printf("La especie con nombre vulgar %s no fue encontrada. \n", NombreVulgar);
-    return;
-}
 
-// Verifico si hya stock disponible 
-if (parbol[indideArbol].stock <= 0)
-{
-    printf("No hay stock disponible para la especie %s \n", parbol[indideArbol].especie.Nvulgar);
-    return;
-}
+    char NombreVulgar[30];
+    printf("Ingrese el nombre vulgar de la especie: ");
+    getchar();
+    gets(NombreVulgar);
 
-// Crear Pedido
-Pedido nuevoPedido;
+    // Buscar el arbol por su nombre vulgar
+    int indiceArbol = -1;
 
-printf("Ingrese la razon social del cliente: ");
-gets(nuevoPedido.cliente.razonSocial);
-printf("Ingrese el telefono celular: ");
-gets(nuevoPedido.cliente.telefono);
-
-printf("Ingrese el nombre del empleado: ");
-gets(nuevoPedido.empleado.Nombre);
-printf("Ingrese el Apellido del empleado: ");
-gets(nuevoPedido.empleado.Apellido);
-
-printf("Ingrese la cantidad de pedidos: ");
-scanf("%d", &nuevoPedido.cantidad);
-
-// Verifico si la cantidad pedida supera el stock
-if (nuevoPedido.cantidad > parbol[indideArbol].stock)
-{
-    printf("No hay suficiente stock. Stock disponibe: %d\n", parbol[indideArbol].stock);
-    return;
-}
-
-// Restar el stock y agregar el pedido
-parbol[indideArbol].stock -= nuevoPedido.cantidad;
-parbol[indideArbol].pedidos = (Pedido *)malloc(sizeof(Pedido));
-parbol[indideArbol].pedidos[0] = nuevoPedido;
-parbol[indideArbol].cantPedidos = 1;
-
-printf("Pedido agregado a la especie '%s'. \n", parbol[indideArbol].especie.Nvulgar);
-
-}
-
-void ActualizarStock (Arbol *parbol, int cantArboles){
-
-        char NombreVulgar[30];
-        printf("Ingrese el nombre vulgar de la especie: ");
-        getchar();
-        gets(NombreVulgar);
-
-        // Buscar el arbol por su nombre vulgar
-        int indiceArbol = -1;
-
-        for (int i = 0; i < cantArboles; i++)
+    for (int i = 0; i < cantArboles; i++)
+    {
+        if (strcmp(parbol[i].especie.Nvulgar, NombreVulgar) == 0)
         {
-            if (strcmp(parbol[i].especie.Nvulgar, NombreVulgar) == 0)
-            {
-                indiceArbol = i;
-                break;
-            }
-            
+            indiceArbol = i;
+            break;
         }
-        
-        // Si no se encuentra el arbol
-        if (indiceArbol == -1)
-        {
-            printf("La especie con nombre %s no fue encontrada\n", NombreVulgar);
-            return;
-        }
-        
+    }
+
+    // Si no se encuentra el arbol
+    if (indiceArbol == -1)
+    {
+        printf("La especie con nombre %s no fue encontrada\n", NombreVulgar);
+        return;
+    }
+
     int NuevoStock;
     printf("Ingrese el nuevo stock para la especie '%s': ", parbol[indiceArbol].especie.Nvulgar);
     scanf("%d", &NuevoStock);
@@ -250,101 +248,97 @@ void ActualizarStock (Arbol *parbol, int cantArboles){
         printf("El nuevo stock no puede ser inferior a los pedidos vigentes (%d) \n", totalPedidos);
         return;
     }
-    
- // Actualizar el stock
 
- parbol[indiceArbol].stock = NuevoStock;
+    // Actualizar el stock
+
+    parbol[indiceArbol].stock = NuevoStock;
     printf("El stock de la especie '%s' ha sido actualizado a %d\n", parbol[indiceArbol].especie.Nvulgar, NuevoStock);
 }
 
-void ActualizarPrecio (Arbol * parbol, int cantArboles) {
+void ActualizarPrecio(Arbol *parbol, int cantArboles)
+{
 
     char NombreVulgar[30];
     printf("Introduce el Nombre vulgar de la espcie: ");
-   fflush(stdin);
+    fflush(stdin);
     gets(NombreVulgar);
 
     // Busco el Arbol por su nombre Vulgar
     int indice = -1;
-    for (int i = 0; i < cantArboles; i++) 
+    for (int i = 0; i < cantArboles; i++)
     {
         if (strcmp(parbol[i].especie.Nvulgar, NombreVulgar) == 0)
         {
             indice = i;
             break;
         }
-              
     }
 
-        if (indice == -1)
-        {
-            printf("El arbol no fue encontrado \n");
-            return;
-        } 
-    
+    if (indice == -1)
+    {
+        printf("El arbol no fue encontrado \n");
+        return;
+    }
+
     float NuevoPrecio;
     printf("Ingrese el nuevo precio para la especie: ");
     scanf("%f", &NuevoPrecio);
 
-  parbol[indice].precio = NuevoPrecio;
-  printf("El nuevo precio de la especie %s es: %.2f\n", parbol[indice].especie.Nvulgar, NuevoPrecio);
-
+    parbol[indice].precio = NuevoPrecio;
+    printf("El nuevo precio de la especie %s es: %.2f\n", parbol[indice].especie.Nvulgar, NuevoPrecio);
 }
-
 
 void main()
 {
 
     Arbol *parbol = cargarDatos();
 
-int opcion;
+    int opcion;
 
-do
-{
-   printf(" *** Gestion de Operacion ***\n");
-   printf("Ingrese: \n");
-   printf("\t 1 - Mostrar todos los arboles/especies disponibles\n");
-   printf("\t 2 - Mostrar arboles/especies segun stock\n");
-   printf(" \t 3 - Agregar pedidos\n");
-   printf("\t 4 -Mostrar todos los pedidos\n");
-   printf("\t 5 -Actualizar stock de un especie\n");
-   printf("\t 6 - Actualizar el precio de una especie\n");
-   printf("\t 7 - Salir\n");
-   printf("Opcion: ");
-   scanf("%d", &opcion);
+    do
+    {
+        printf(" *** Gestion de Operacion ***\n");
+        printf("Ingrese: \n");
+        printf("\t 1 - Mostrar todos los arboles/especies disponibles\n");
+        printf("\t 2 - Mostrar arboles/especies segun stock\n");
+        printf(" \t 3 - Agregar pedidos\n");
+        printf("\t 4 -Mostrar todos los pedidos\n");
+        printf("\t 5 -Actualizar stock de un especie\n");
+        printf("\t 6 - Actualizar el precio de una especie\n");
+        printf("\t 7 - Salir\n");
+        printf("Opcion: ");
+        scanf("%d", &opcion);
 
-   switch (opcion)
-   {
-   case 1:
-        MostrarArboles(parbol);
-    break;
-      case 2:
-        MostrarStock(parbol);
-    break;
-       case 3:
-      AgregarPedidos(parbol, 3 );
-    break;
-       case 4:
-       MostrarPedidos(parbol);
-       
-    break;
-      case 5:
-       ActualizarStock(parbol, 3);
-    break;
-       case 6:
-     ActualizarPrecio(parbol, 3);
-       
-    break;
-           case 7:
-    printf("Saliendo...");
-    break;
+        switch (opcion)
+        {
+        case 1:
+            MostrarArboles(parbol);
+            break;
+        case 2:
+            MostrarStock(parbol);
+            break;
+        case 3:
+            AgregarPedidos(parbol, 3);
+            break;
+        case 4:
+            MostrarPedidos(parbol);
 
-   default:
-   printf("Opcion No Valida");
-    break;
-   }
+            break;
+        case 5:
+            ActualizarStock(parbol, 3);
+            break;
+        case 6:
+            ActualizarPrecio(parbol, 3);
 
-} while (opcion != 7);
+            break;
+        case 7:
+            printf("Saliendo...");
+            break;
 
+        default:
+            printf("Opcion No Valida");
+            break;
+        }
 
+    } while (opcion != 7);
 }
