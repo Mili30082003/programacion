@@ -36,7 +36,9 @@ struct Producto
 Producto *cargarDatos();
 void ClientesBrabante(Producto *productos, int cantProductos);
 void AumentarPrecio(Producto *productos, int cantProductos);
+void LiberarEspacio(Producto *productos, int cantProductos);
 
+/*------------------------------------------------------------------*/
 void main()
 {
 
@@ -66,6 +68,7 @@ void main()
         }
     } while (opcion != 3);
 }
+/*------------------------------------------------------------------------------------*/
 
 Producto *cargarDatos()
 {
@@ -154,5 +157,17 @@ void AumentarPrecio(Producto *productos, int cantProductos)
         printf("\t Nombre del producto: %s\n", productos[i].NombreProducto);
         printf("\t Precio: $%2.f\n", productos[i].PrecioProducto);
         printf("\t Stock: %d\n", productos[i].stock);
+    }
+}
+
+void LiberarEspacio(Producto * productos, int cantProductos)
+{
+
+    for (int i = 0; i < cantProductos; i++)
+    {
+
+        free(productos[i].clientes);
+
+        free(productos);
     }
 }
