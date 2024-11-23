@@ -96,6 +96,7 @@ void MostrarVuelosConDestinoCordoba(Vuelo *vuelos, int cantVuelos)
             printf("Destino: %s\n", vuelos[i].destino);
             printf("Fecha Vuelo: %d/%d/%d\n", vuelos[i].fechavuelo.dia, vuelos[i].fechavuelo.mes, vuelos[i].fechavuelo.anio);
             printf("Cantidad de Asientos: %d\n", vuelos[i].cantAsientos);
+            printf("\n");
         }
     }
 }
