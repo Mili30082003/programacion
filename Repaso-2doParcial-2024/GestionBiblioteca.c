@@ -47,7 +47,7 @@ void RealizarPrestamo(Libro *libros, int cantLibros);
 void MostrarPrestamo(Libro *libros, int cantLibros);
 void RegistrarDevolucion(Libro *libros, int cantLibros);
 void ActualizarEjemplares(Libro *libros, int cantLibros);
-void LiberarMemoria();
+void LiberarMemoria(Libro * libros, int cantLibros);
 /*------------------------------------------------*/
 
 void main()
@@ -315,4 +315,14 @@ void ActualizarEjemplares(Libro *libros, int cantLibros)
             printf("Cantidad de Ejemplares: %d\n", libros[i].CantEjemplares);
         }
     }
+}
+
+void LiberarMemoria(Libro * libros, int cantLibros){
+
+    for (int i = 0; i < cantLibros; i++)
+    {
+        
+        free(libros[i].prestamos);
+    }
+    free(libros);
 }
